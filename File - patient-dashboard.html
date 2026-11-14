@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediAssist - Patient Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f0f7f8;
+    color: #263238;
+}
+
+header {
+    background: #087db5;
+    color: white;
+    padding: 18px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+header p {
+    margin: 6px 0 0;
+}
+
+.topbar {
+    background: white;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    box-shadow: 0 2px 8px #00000010;
+}
+
+.topbar span {
+    font-weight: bold;
+    color: #087db5;
+}
+
+.logout {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.welcome {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+    border-left: 5px solid #15966b;
+}
+
+.welcome h2 {
+    color: #087db5;
+    margin-top: 0;
+}
+
+.section-title {
+    color: #087db5;
+    margin-bottom: 18px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 22px;
+    border-radius: 13px;
+    text-align: center;
+    box-shadow: 0 3px 12px #00000010;
+    cursor: pointer;
+    transition: 0.2s;
+    border-bottom: 4px solid #087db5;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+}
+
+.dashboard-card .icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.dashboard-card h3 {
+    color: #087db5;
+    margin: 8px 0;
+}
+
+.dashboard-card p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.content-section {
+    background: white;
+    padding: 22px;
+    margin-top: 25px;
+    border-radius: 12px;
+}
+
+.content-section h3 {
+    color: #087db5;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>MediAssist</h1>
+    <p>Your Health, Our Support</p>
+</header>
+
+<div class="topbar">
+    <span>Patient Dashboard</span>
+
+    <button class="logout"
+    onclick="window.location.href='login.html'">
+        Logout
+    </button>
+</div>
+
+<div class="container">
+
+    <div class="welcome">
+        <h2>Welcome to MediAssist!</h2>
+        <p>
+            Manage your medical reports, prescriptions
+            and appointments from one place.
+        </p>
+    </div>
+
+    <h2 class="section-title">My Dashboard</h2>
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card"
+        onclick="showProfile()">
+            <div class="icon">👤</div>
+            <h3>My Profile</h3>
+            <p>View your personal information.</p>
+        </div>
+
+        <div class="dashboard-card"
+        onclick="window.location.href='reports.html'">
+            <div class="icon">📁</div>
+            <h3>My Medical Reports</h3>
+            <p>Upload and view your medical reports.</p>
+        </div>
+
+        <div class="dashboard-card"
+        onclick="window.location.href='prescriptions.html'">
+            <div class="icon">💊</div>
+            <h3>My Prescriptions</h3>
+            <p>View your doctor's prescriptions.</p>
+        </div>
+
+        <div class="dashboard-card"
+        onclick="window.location.href='appointment.html'">
+            <div class="icon">📅</div>
+            <h3>Book Appointment</h3>
+            <p>Request an appointment with a doctor.</p>
+        </div>
+
+        <div class="dashboard-card"
+        onclick="window.location.href='doctors.html'">
+            <div class="icon">👨‍⚕️</div>
+            <h3>Doctor Information</h3>
+            <p>Search doctors and their specialties.</p>
+        </div>
+
+        <div class="dashboard-card"
+        onclick="showAppointments()">
+            <div class="icon">📋</div>
+            <h3>My Appointments</h3>
+            <p>View your saved appointment requests.</p>
+        </div>
+
+    </div>
+
+    <div class="content-section" id="profileSection"
+    style="display:none;">
+
+        <h3>My Profile</h3>
+        <p>Patient profile information will appear here.</p>
+
+    </div>
+
+    <div class="content-section" id="appointmentSection"
+    style="display:none;">
+
+        <h3>My Appointments</h3>
+        <div id="appointmentList"></div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 MediAssist | Your Health, Our Support
+</footer>
+
+<script>
+
+function showProfile() {
+
+    const section = document.getElementById("profileSection");
+    const appointments = document.getElementById("appointmentSection");
+
+    appointments.style.display = "none";
+
+    section.style.display =
+        section.style.display === "none" ? "block" : "none";
+
+    section.scrollIntoView({behavior: "smooth"});
+
+}
+
+
+function showAppointments() {
+
+    const section = document.getElementById("appointmentSection");
+    const profile = document.getElementById("profileSection");
+
+    profile.style.display = "none";
+
+    section.style.display = "block";
+
+    const list = document.getElementById("appointmentList");
+
+    const appointments = JSON.parse(
+        localStorage.getItem("demoAppointments") || "[]"
+    );
+
+    list.innerHTML = "";
+
+    if (appointments.length === 0) {
+        list.textContent = "No appointment requests available yet.";
+    } else {
+
+        appointments.forEach(function(item, index) {
+
+            const card = document.createElement("div");
+
+            card.style.padding = "15px";
+            card.style.marginTop = "12px";
+            card.style.background = "#f0f7f8";
+            card.style.borderRadius = "8px";
+
+            const title = document.createElement("h4");
+            title.textContent = "Appointment " + (index + 1);
+
+            const details = document.createElement("p");
+
+            details.textContent =
+                "Patient: " + item.patientName +
+                " | Doctor: " + item.doctor +
+                " | Department: " + item.department +
+                " | Date: " + item.date +
+                " | Time: " + item.time;
+
+            card.append(title, details);
+            list.appendChild(card);
+
+        });
+
+    }
+
+    section.scrollIntoView({behavior: "smooth"});
+
+}
+
+</script>
+
+</body>
+</html>

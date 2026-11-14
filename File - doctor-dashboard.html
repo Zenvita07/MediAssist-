@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Dashboard - MediAssist</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f0f7fa;
+    color: #18334a;
+}
+
+header {
+    background: #0879bd;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+header p {
+    margin-top: 8px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+h2 {
+    color: #0879bd;
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin: 13px 0 7px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd9e2;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+button {
+    border: none;
+    padding: 12px 17px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.primary-btn {
+    background: #0879bd;
+    color: white;
+}
+
+.green-btn {
+    background: #159b73;
+    color: white;
+}
+
+.back-btn {
+    background: #e2edf3;
+    color: #18334a;
+}
+
+.appointment {
+    border: 1px solid #dce8ef;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+.appointment p {
+    margin-top: 7px;
+    line-height: 1.5;
+}
+
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: #758797;
+}
+
+.note {
+    background: #e7f6ed;
+    padding: 12px;
+    border-radius: 8px;
+    color: #267448;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>💙 MediAssist</h1>
+    <p>Doctor Dashboard</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>👨‍⚕️ Welcome, Doctor</h2>
+        <p>Manage patient appointments and prescriptions.</p>
+    </div>
+
+    <div class="card">
+        <h2>📅 Patient Appointments</h2>
+        <div id="appointmentList">
+            <p class="empty">No appointments available yet.</p>
+        </div>
+    </div>
+
+    <div class="card" id="prescriptionForm">
+        <h2>💊 Create Patient Prescription</h2>
+
+        <label>Patient Full Name</label>
+        <input type="text" id="patientName"
+        placeholder="Enter patient name">
+
+        <label>Patient Mobile Number</label>
+        <input type="tel" id="patientMobile"
+        placeholder="Enter patient mobile number">
+
+        <label>Doctor Name</label>
+        <input type="text" id="doctorName"
+        placeholder="Enter doctor name">
+
+        <label>Prescription Date</label>
+        <input type="date" id="prescriptionDate">
+
+        <label>Medicine Name</label>
+        <input type="text" id="medicineName"
+        placeholder="Enter medicine name">
+
+        <label>Dosage</label>
+        <input type="text" id="dosage"
+        placeholder="As prescribed by doctor">
+
+        <label>Instructions</label>
+        <textarea id="instructions"
+        placeholder="Enter doctor's instructions"></textarea>
+
+        <button class="green-btn" onclick="savePrescription()">
+            Save Prescription
+        </button>
+
+        <div class="note">
+            Prescriptions should only be entered and approved
+            by a qualified healthcare professional.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📋 Saved Prescriptions</h2>
+        <div id="prescriptionList">
+            <p class="empty">No prescriptions added yet.</p>
+        </div>
+    </div>
+
+    <button class="back-btn"
+    onclick="window.location.href='login.html'">
+        Logout
+    </button>
+
+</div>
+
+<script>
+const APPOINTMENT_KEY = "demoAppointments";
+const PRESCRIPTION_KEY = "demoPrescriptions";
+
+function getData(key) {
+    try {
+        return JSON.parse(localStorage.getItem(key)) || [];
+    } catch(error) {
+        return [];
+    }
+}
+
+function showAppointments() {
+    const appointments = getData(APPOINTMENT_KEY);
+    const list = document.getElementById("appointmentList");
+
+    if (appointments.length === 0) {
+        list.innerHTML =
+        '<p class="empty">No appointments available yet.</p>';
+        return;
+    }
+
+    list.innerHTML = "";
+
+    appointments.forEach(function(a) {
+        const box = document.createElement("div");
+        box.className = "appointment";
+
+        const title = document.createElement("h3");
+        title.textContent = "👤 " +
+            (a.patientName || a.name || "Patient");
+
+        const details = document.createElement("p");
+        details.textContent =
+            "Mobile: " + (a.mobile || a.phone || "Not available") +
+            "\nDoctor: " + (a.doctorName || a.doctor || "Not specified") +
+            "\nDepartment: " + (a.department || "Not specified") +
+            "\nDate: " + (a.date || a.appointmentDate || "Not specified") +
+            "\nTime: " + (a.time || "Not specified");
+
+        details.style.whiteSpace = "pre-line";
+
+        const button = document.createElement("button");
+        button.className = "primary-btn";
+        button.textContent = "Create Prescription";
+
+        button.onclick = function() {
+            document.getElementById("patientName").value =
+                a.patientName || a.name || "";
+
+            document.getElementById("patientMobile").value =
+                a.mobile || a.phone || "";
+
+            document.getElementById("prescriptionForm")
+                .scrollIntoView({behavior: "smooth"});
+        };
+
+        box.appendChild(title);
+        box.appendChild(details);
+        box.appendChild(button);
+        list.appendChild(box);
+    });
+}
+
+function savePrescription() {
+    const patientName =
+        document.getElementById("patientName").value.trim();
+
+    const patientMobile =
+        document.getElementById("patientMobile").value.trim();
+
+    const doctorName =
+        document.getElementById("doctorName").value.trim();
+
+    const date =
+        document.getElementById("prescriptionDate").value;
+
+    const medicine =
+        document.getElementById("medicineName").value.trim();
+
+    const dosage =
+        document.getElementById("dosage").value.trim();
+
+    const instructions =
+        document.getElementById("instructions").value.trim();
+
+    if (!patientName || !patientMobile || !doctorName ||
+        !date || !medicine || !dosage || !instructions) {
+        alert("Please fill in all prescription details.");
+        return;
+    }
+
+    const prescriptions = getData(PRESCRIPTION_KEY);
+
+    prescriptions.unshift({
+        id: Date.now().toString(),
+        patientName: patientName,
+        patientMobile: patientMobile,
+        doctorName: doctorName,
+        date: date,
+        medicine: medicine,
+        dosage: dosage,
+        instructions: instructions
+    });
+
+    try {
+        localStorage.setItem(
+            PRESCRIPTION_KEY,
+            JSON.stringify(prescriptions)
+        );
+
+        alert("Prescription saved successfully!");
+
+        document.getElementById("medicineName").value = "";
+        document.getElementById("dosage").value = "";
+        document.getElementById("instructions").value = "";
+
+        showPrescriptions();
+
+    } catch(error) {
+        alert("Storage is full. Please try again.");
+    }
+}
+
+function showPrescriptions() {
+    const prescriptions = getData(PRESCRIPTION_KEY);
+    const list = document.getElementById("prescriptionList");
+
+    if (prescriptions.length === 0) {
+        list.innerHTML =
+        '<p class="empty">No prescriptions added yet.</p>';
+        return;
+    }
+
+    list.innerHTML = "";
+
+    prescriptions.forEach(function(p) {
+        const box = document.createElement("div");
+        box.className = "appointment";
+
+        const title = document.createElement("h3");
+        title.textContent = "💊 " + p.patientName;
+
+        const details = document.createElement("p");
+        details.textContent =
+            "Doctor: " + p.doctorName +
+            "\nDate: " + p.date +
+            "\nMedicine: " + p.medicine +
+            "\nDosage: " + p.dosage +
+            "\nInstructions: " + p.instructions;
+
+        details.style.whiteSpace = "pre-line";
+
+        box.appendChild(title);
+        box.appendChild(details);
+        list.appendChild(box);
+    });
+}
+
+showAppointments();
+showPrescriptions();
+</script>
+
+</body>
+</html>

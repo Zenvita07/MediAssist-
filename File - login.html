@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MediAssist - Login</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: #f0f7f5;
+    color: #243b50;
+    min-height: 100vh;
+    text-align: center;
+}
+
+header {
+    background: #087db8;
+    color: white;
+    padding: 32px 10px;
+}
+
+header h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+header p {
+    font-size: 21px;
+}
+
+.language-area {
+    margin: 48px 0 85px;
+}
+
+.language-area label {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select {
+    padding: 15px 25px;
+    border: 2px solid #888;
+    border-radius: 15px;
+    background: #fff;
+    font-size: 18px;
+    min-width: 160px;
+}
+
+.container {
+    background: white;
+    width: 92%;
+    max-width: 650px;
+    margin: auto;
+    padding: 65px 30px 45px;
+    border-radius: 28px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+}
+
+.container h2 {
+    color: #087db8;
+    font-size: 34px;
+    margin-bottom: 38px;
+}
+
+.container h3 {
+    font-size: 24px;
+    margin-bottom: 32px;
+}
+
+.button-area {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.main-btn {
+    background: #087db8;
+    color: white;
+    border: none;
+    border-radius: 17px;
+    padding: 24px 20px;
+    font-size: 19px;
+    cursor: pointer;
+    flex: 1;
+    min-width: 210px;
+}
+
+.main-btn:hover {
+    background: #05699d;
+}
+
+.form-box {
+    display: none;
+    text-align: left;
+}
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-box label {
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 17px 0 8px;
+}
+
+.form-box input[type="text"],
+.form-box input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.options a {
+    color: #087db8;
+    text-decoration: none;
+}
+
+.submit-btn {
+    width: 100%;
+    background: #087db8;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.back-btn {
+    width: 100%;
+    background: #20a66b;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 17px;
+    margin-top: 14px;
+    cursor: pointer;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 15px;
+}
+
+.register-link a {
+    color: #087db8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    margin: 90px 10px 35px;
+    color: #647381;
+    font-size: 20px;
+}
+
+@media(max-width: 500px) {
+    header h1 {
+        font-size: 34px;
+    }
+
+    .container {
+        padding: 48px 20px 40px;
+    }
+
+    .container h2 {
+        font-size: 30px;
+    }
+
+    .main-btn {
+        width: 100%;
+        flex: auto;
+    }
+
+    .language-area {
+        margin-bottom: 65px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>MediAssist</h1>
+    <p id="tagline">Your Health, Our Support</p>
+</header>
+
+<div class="language-area">
+    <label id="languageLabel">Choose Language</label>
+
+    <select id="language" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="hi">हिन्दी</option>
+    </select>
+</div>
+
+<!-- LOGIN CHOICE PAGE -->
+
+<div class="container" id="choicePage">
+
+    <h2 id="loginHeading">Login</h2>
+
+    <h3 id="chooseText">Choose your login type</h3>
+
+    <div class="button-area">
+
+        <button class="main-btn" onclick="openForm('patient')"
+        id="patientChoice">
+            Patient Login
+        </button>
+
+        <button class="main-btn" onclick="openForm('doctor')"
+        id="doctorChoice">
+            Doctor Login
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PATIENT LOGIN FORM -->
+
+<div class="container form-box" id="patientForm">
+
+    <h2 id="patientHeading">Patient Login</h2>
+
+    <form onsubmit="loginDemo(event, 'Patient')">
+
+        <label id="patientMobileLabel">
+            Mobile Number or Email
+        </label>
+
+        <input type="text"
+        id="patientMobile"
+        placeholder="Enter mobile number or email"
+        required>
+
+        <label id="patientPasswordLabel">Password</label>
+
+        <input type="password"
+        id="patientPassword"
+        placeholder="Enter your password"
+        required>
+
+        <div class="options">
+            <label>
+                <input type="checkbox">
+                <span id="patientRemember">Remember Me</span>
+            </label>
+
+            <a href="#" onclick="forgotPassword(event)"
+            id="patientForgot">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="submit-btn"
+        id="patientSubmit">Login</button>
+
+    </form>
+
+    <div class="register-link">
+        <span id="patientNew">New Patient?</span>
+        <a href="register.html" id="patientRegister">
+            Register Here
+        </a>
+    </div>
+
+    <button class="back-btn" onclick="goBack()" id="patientBack">
+        Back
+    </button>
+
+</div>
+
+<!-- DOCTOR LOGIN FORM -->
+
+<div class="container form-box" id="doctorForm">
+
+    <h2 id="doctorHeading">Doctor Login</h2>
+
+    <form onsubmit="loginDemo(event, 'Doctor')">
+
+        <label id="doctorMobileLabel">
+            Mobile Number or Email
+        </label>
+
+        <input type="text"
+        id="doctorMobile"
+        placeholder="Enter mobile number or email"
+        required>
+
+        <label id="doctorPasswordLabel">Password</label>
+
+        <input type="password"
+        id="doctorPassword"
+        placeholder="Enter your password"
+        required>
+
+        <div class="options">
+            <label>
+                <input type="checkbox">
+                <span id="doctorRemember">Remember Me</span>
+            </label>
+
+            <a href="#" onclick="forgotPassword(event)"
+            id="doctorForgot">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="submit-btn"
+        id="doctorSubmit">Login</button>
+
+    </form>
+
+    <div class="register-link">
+        <span id="doctorNew">New Doctor?</span>
+        <a href="register.html" id="doctorRegister">
+            Register Here
+        </a>
+    </div>
+
+    <button class="back-btn" onclick="goBack()" id="doctorBack">
+        Back
+    </button>
+
+</div>
+
+<footer>
+    <p>© 2026 MediAssist | All Rights Reserved</p>
+</footer>
+
+<script>
+
+let selectedLanguage = "en";
+
+function openForm(type) {
+    document.getElementById("choicePage").style.display = "none";
+
+    document.getElementById("patientForm").style.display = "none";
+    document.getElementById("doctorForm").style.display = "none";
+
+    if (type === "patient") {
+        document.getElementById("patientForm").style.display = "block";
+    } else {
+        document.getElementById("doctorForm").style.display = "block";
+    }
+}
+
+function goBack() {
+    document.getElementById("patientForm").style.display = "none";
+    document.getElementById("doctorForm").style.display = "none";
+    document.getElementById("choicePage").style.display = "block";
+}
+
+function loginDemo(event, role) {
+    event.preventDefault();
+    alert(role + " Login design is ready. Real login needs backend connection.");
+}
+
+function forgotPassword(event) {
+    event.preventDefault();
+    alert("Password recovery feature will be added later.");
+}
+
+const translations = {
+
+en: {
+tagline:"Your Health, Our Support",
+languageLabel:"Choose Language",
+loginHeading:"Login",
+chooseText:"Choose your login type",
+patientChoice:"Patient Login",
+doctorChoice:"Doctor Login",
+patientHeading:"Patient Login",
+doctorHeading:"Doctor Login",
+patientMobileLabel:"Mobile Number or Email",
+doctorMobileLabel:"Mobile Number or Email",
+patientPasswordLabel:"Password",
+doctorPasswordLabel:"Password",
+patientRemember:"Remember Me",
+doctorRemember:"Remember Me",
+patientForgot:"Forgot Password?",
+doctorForgot:"Forgot Password?",
+patientSubmit:"Login",
+doctorSubmit:"Login",
+patientNew:"New Patient?",
+doctorNew:"New Doctor?",
+patientRegister:"Register Here",
+doctorRegister:"Register Here",
+patientBack:"Back",
+doctorBack:"Back"
+},
+
+gu: {
+tagline:"તમારું સ્વાસ્થ્ય, અમારો સહયોગ",
+languageLabel:"ભાષા પસંદ કરો",
+loginHeading:"લોગિન",
+chooseText:"તમારો લોગિન પ્રકાર પસંદ કરો",
+patientChoice:"દર્દી લોગિન",
+doctorChoice:"ડૉક્ટર લોગિન",
+patientHeading:"દર્દી લોગિન",
+doctorHeading:"ડૉક્ટર લોગિન",
+patientMobileLabel:"મોબાઇલ નંબર અથવા ઇમેઇલ",
+doctorMobileLabel:"મોબાઇલ નંબર અથવા ઇમેઇલ",
+patientPasswordLabel:"પાસવર્ડ",
+doctorPasswordLabel:"પાસવર્ડ",
+patientRemember:"મને યાદ રાખો",
+doctorRemember:"મને યાદ રાખો",
+patientForgot:"પાસવર્ડ ભૂલી ગયા?",
+doctorForgot:"પાસવર્ડ ભૂલી ગયા?",
+patientSubmit:"લોગિન",
+doctorSubmit:"લોગિન",
+patientNew:"નવા દર્દી છો?",
+doctorNew:"નવા ડૉક્ટર છો?",
+patientRegister:"અહીં રજીસ્ટર કરો",
+doctorRegister:"અહીં રજીસ્ટર કરો",
+patientBack:"પાછા જાઓ",
+doctorBack:"પાછા જાઓ"
+},
+
+hi: {
+tagline:"आपका स्वास्थ्य, हमारा सहयोग",
+languageLabel:"भाषा चुनें",
+loginHeading:"लॉगिन",
+chooseText:"अपना लॉगिन प्रकार चुनें",
+patientChoice:"मरीज़ लॉगिन",
+doctorChoice:"डॉक्टर लॉगिन",
+patientHeading:"मरीज़ लॉगिन",
+doctorHeading:"डॉक्टर लॉगिन",
+patientMobileLabel:"मोबाइल नंबर या ईमेल",
+doctorMobileLabel:"मोबाइल नंबर या ईमेल",
+patientPasswordLabel:"पासवर्ड",
+doctorPasswordLabel:"पासवर्ड",
+patientRemember:"मुझे याद रखें",
+doctorRemember:"मुझे याद रखें",
+patientForgot:"पासवर्ड भूल गए?",
+doctorForgot:"पासवर्ड भूल गए?",
+patientSubmit:"लॉगिन",
+doctorSubmit:"लॉगिन",
+patientNew:"नए मरीज़ हैं?",
+doctorNew:"नए डॉक्टर हैं?",
+patientRegister:"यहाँ रजिस्टर करें",
+doctorRegister:"यहाँ रजिस्टर करें",
+patientBack:"वापस जाएँ",
+doctorBack:"वापस जाएँ"
+}
+
+};
+
+function changeLanguage() {
+
+    selectedLanguage = document.getElementById("language").value;
+
+    let data = translations[selectedLanguage];
+
+    for (let id in data) {
+        document.getElementById(id).innerText = data[id];
+    }
+}
+
+</script>
+
+</body>
+</html>
