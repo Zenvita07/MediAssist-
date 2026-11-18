@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediAssist - Doctor Information</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f0f7f8;
+    color: #263238;
+}
+
+header {
+    background: #087db5;
+    color: white;
+    text-align: center;
+    padding: 22px 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 7px 0 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.page-title {
+    text-align: center;
+    color: #087db5;
+}
+
+.search-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: 1px solid #cbd5dc;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+.doctor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.doctor-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px #00000010;
+    text-align: center;
+}
+
+.doctor-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    color: #087db5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: auto;
+}
+
+.doctor-card h3 {
+    color: #087db5;
+    margin-bottom: 8px;
+}
+
+.doctor-card p {
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.tag {
+    display: inline-block;
+    background: #e5f7ed;
+    color: #147548;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    background: #087db5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back-btn {
+    background: #15966b;
+    max-width: 350px;
+    display: block;
+    margin: 30px auto;
+}
+
+.empty-message {
+    text-align: center;
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 18px;
+    color: #64748b;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>MediAssist</h1>
+    <p>Your Health, Our Support</p>
+</header>
+
+<div class="container">
+
+    <h2 class="page-title">Doctor Information</h2>
+
+    <p style="text-align:center;">
+        Find doctors and explore medical specialties.
+    </p>
+
+    <div class="search-box">
+
+        <label><b>Search Doctor</b></label>
+        <input type="text" id="searchDoctor"
+        placeholder="Search doctor name or specialization...">
+
+        <label><b>Select Department</b></label>
+
+        <select id="departmentFilter">
+            <option value="">All Departments</option>
+            <option>General Medicine</option>
+            <option>General Surgery</option>
+            <option>Cardiology</option>
+            <option>Cardiothoracic Surgery</option>
+            <option>Dermatology</option>
+            <option>Dental</option>
+            <option>Orthodontics</option>
+            <option>Endodontics</option>
+            <option>Oral Surgery</option>
+            <option>Gynecology</option>
+            <option>Obstetrics</option>
+            <option>Pediatrics</option>
+            <option>Neonatology</option>
+            <option>Neurology</option>
+            <option>Neurosurgery</option>
+            <option>Orthopedics</option>
+            <option>Ophthalmology</option>
+            <option>ENT</option>
+            <option>Urology</option>
+            <option>Nephrology</option>
+            <option>Gastroenterology</option>
+            <option>Hepatology</option>
+            <option>Oncology</option>
+            <option>Medical Oncology</option>
+            <option>Surgical Oncology</option>
+            <option>Radiation Oncology</option>
+            <option>Hematology</option>
+            <option>Endocrinology</option>
+            <option>Diabetology</option>
+            <option>Pulmonology</option>
+            <option>Chest Medicine</option>
+            <option>Psychiatry</option>
+            <option>Psychology</option>
+            <option>Rheumatology</option>
+            <option>Immunology</option>
+            <option>Allergy Medicine</option>
+            <option>Infectious Diseases</option>
+            <option>Pathology</option>
+            <option>Radiology</option>
+            <option>Interventional Radiology</option>
+            <option>Anesthesiology</option>
+            <option>Critical Care</option>
+            <option>Emergency Medicine</option>
+            <option>Physiotherapy</option>
+            <option>Sports Medicine</option>
+            <option>Plastic Surgery</option>
+            <option>Vascular Surgery</option>
+            <option>Thoracic Surgery</option>
+            <option>Spine Surgery</option>
+            <option>Burns and Plastic Surgery</option>
+            <option>Geriatric Medicine</option>
+            <option>Palliative Care</option>
+            <option>Family Medicine</option>
+            <option>Nutrition and Dietetics</option>
+            <option>Speech Therapy</option>
+            <option>Audiology</option>
+            <option>Occupational Therapy</option>
+            <option>Ayurveda</option>
+            <option>Homeopathy</option>
+            <option>Unani Medicine</option>
+            <option>Siddha Medicine</option>
+            <option>Preventive Medicine</option>
+            <option>Community Medicine</option>
+            <option>Reproductive Medicine</option>
+            <option>Fertility Specialist</option>
+            <option>Sleep Medicine</option>
+            <option>Other</option>
+        </select>
+
+    </div>
+
+    <div class="doctor-grid" id="doctorGrid">
+
+        <div class="doctor-card" data-department="General Medicine">
+            <div class="doctor-icon">👨‍⚕️</div>
+            <h3>Dr. Demo One</h3>
+            <span class="tag">General Medicine</span>
+            <p><b>Qualification:</b> MBBS, MD</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+        <div class="doctor-card" data-department="Cardiology">
+            <div class="doctor-icon">👨‍⚕️</div>
+            <h3>Dr. Demo Two</h3>
+            <span class="tag">Cardiology</span>
+            <p><b>Qualification:</b> MBBS, MD, DM</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+        <div class="doctor-card" data-department="Dermatology">
+            <div class="doctor-icon">👩‍⚕️</div>
+            <h3>Dr. Demo Three</h3>
+            <span class="tag">Dermatology</span>
+            <p><b>Qualification:</b> MBBS, MD</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+        <div class="doctor-card" data-department="Dental">
+            <div class="doctor-icon">👩‍⚕️</div>
+            <h3>Dr. Demo Four</h3>
+            <span class="tag">Dental</span>
+            <p><b>Qualification:</b> BDS, MDS</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+        <div class="doctor-card" data-department="Gynecology">
+            <div class="doctor-icon">👩‍⚕️</div>
+            <h3>Dr. Demo Five</h3>
+            <span class="tag">Gynecology</span>
+            <p><b>Qualification:</b> MBBS, MS</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+        <div class="doctor-card" data-department="Neurology">
+            <div class="doctor-icon">👨‍⚕️</div>
+            <h3>Dr. Demo Six</h3>
+            <span class="tag">Neurology</span>
+            <p><b>Qualification:</b> MBBS, MD, DM</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+        <div class="doctor-card" data-department="Orthopedics">
+            <div class="doctor-icon">👨‍⚕️</div>
+            <h3>Dr. Demo Seven</h3>
+            <span class="tag">Orthopedics</span>
+            <p><b>Qualification:</b> MBBS, MS</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+        <div class="doctor-card" data-department="Pediatrics">
+            <div class="doctor-icon">👩‍⚕️</div>
+            <h3>Dr. Demo Eight</h3>
+            <span class="tag">Pediatrics</span>
+            <p><b>Qualification:</b> MBBS, MD</p>
+            <p><b>Experience:</b> Demo information</p>
+            <p><b>Hospital:</b> Demo Hospital</p>
+            <button onclick="bookAppointment()">Book Appointment</button>
+        </div>
+
+    </div>
+
+    <div class="empty-message" id="emptyMessage">
+        <h3>No Doctor Found</h3>
+        <p>Please try another name or department.</p>
+    </div>
+
+    <button class="back-btn"
+    onclick="window.location.href='patient-dashboard.html'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+<footer>
+    © 2026 MediAssist | Your Health, Our Support
+</footer>
+
+<script>
+
+const searchInput = document.getElementById("searchDoctor");
+const departmentFilter = document.getElementById("departmentFilter");
+const doctorCards = document.querySelectorAll(".doctor-card");
+const emptyMessage = document.getElementById("emptyMessage");
+
+function filterDoctors() {
+
+    const searchText = searchInput.value.toLowerCase();
+    const selectedDepartment = departmentFilter.value;
+
+    let visibleCount = 0;
+
+    doctorCards.forEach(function(card) {
+
+        const cardText = card.innerText.toLowerCase();
+        const cardDepartment = card.dataset.department;
+
+        const matchesSearch = cardText.includes(searchText);
+        const matchesDepartment =
+            selectedDepartment === "" ||
+            selectedDepartment === cardDepartment;
+
+        if (matchesSearch && matchesDepartment) {
+            card.style.display = "block";
+            visibleCount++;
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+    emptyMessage.style.display =
+        visibleCount === 0 ? "block" : "none";
+}
+
+searchInput.addEventListener("input", filterDoctors);
+departmentFilter.addEventListener("change", filterDoctors);
+
+function bookAppointment() {
+    window.location.href = "appointment.html";
+}
+
+</script>
+
+</body>
+</html>

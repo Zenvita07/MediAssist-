@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediAssist - Book Appointment</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f0f7f8;
+    color: #263238;
+}
+
+header {
+    background: #087db5;
+    color: white;
+    text-align: center;
+    padding: 22px 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 7px 0 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 25px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px #00000015;
+}
+
+h2 {
+    text-align: center;
+    color: #087db5;
+}
+
+label {
+    display: block;
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #cbd5dc;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 22px;
+    background: #087db5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back-btn {
+    background: #15966b;
+    margin-top: 12px;
+}
+
+#otherDepartmentBox {
+    display: none;
+}
+
+#successMessage {
+    display: none;
+    margin-top: 18px;
+    padding: 15px;
+    background: #e5f7ed;
+    color: #147548;
+    border-radius: 8px;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 18px;
+    color: #64748b;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>MediAssist</h1>
+    <p>Your Health, Our Support</p>
+</header>
+
+<div class="container">
+
+    <h2>Book Your Appointment</h2>
+
+    <form id="appointmentForm">
+
+        <label>Patient Name</label>
+        <input type="text" id="patientName"
+        placeholder="Enter patient full name" required>
+
+        <label>Mobile Number</label>
+        <input type="tel" id="mobile"
+        placeholder="Enter 10-digit mobile number"
+        pattern="[0-9]{10}" maxlength="10" required>
+
+        <label>Doctor Name</label>
+        <input type="text" id="doctor"
+        placeholder="Enter doctor name" required>
+
+        <label>Select Department</label>
+        <select id="department" required>
+            <option value="">-- Select Department --</option>
+            <option>General Medicine</option>
+            <option>General Surgery</option>
+            <option>Cardiology</option>
+            <option>Cardiothoracic Surgery</option>
+            <option>Dermatology</option>
+            <option>Dental</option>
+            <option>Orthodontics</option>
+            <option>Endodontics</option>
+            <option>Oral Surgery</option>
+            <option>Gynecology</option>
+            <option>Obstetrics</option>
+            <option>Pediatrics</option>
+            <option>Neonatology</option>
+            <option>Neurology</option>
+            <option>Neurosurgery</option>
+            <option>Orthopedics</option>
+            <option>Ophthalmology</option>
+            <option>ENT</option>
+            <option>Urology</option>
+            <option>Nephrology</option>
+            <option>Gastroenterology</option>
+            <option>Hepatology</option>
+            <option>Oncology</option>
+            <option>Medical Oncology</option>
+            <option>Surgical Oncology</option>
+            <option>Radiation Oncology</option>
+            <option>Hematology</option>
+            <option>Endocrinology</option>
+            <option>Diabetology</option>
+            <option>Pulmonology</option>
+            <option>Chest Medicine</option>
+            <option>Psychiatry</option>
+            <option>Psychology</option>
+            <option>Rheumatology</option>
+            <option>Immunology</option>
+            <option>Allergy Medicine</option>
+            <option>Infectious Diseases</option>
+            <option>Pathology</option>
+            <option>Radiology</option>
+            <option>Interventional Radiology</option>
+            <option>Anesthesiology</option>
+            <option>Critical Care</option>
+            <option>Emergency Medicine</option>
+            <option>Physiotherapy</option>
+            <option>Sports Medicine</option>
+            <option>Plastic Surgery</option>
+            <option>Vascular Surgery</option>
+            <option>Thoracic Surgery</option>
+            <option>Spine Surgery</option>
+            <option>Burns and Plastic Surgery</option>
+            <option>Geriatric Medicine</option>
+            <option>Palliative Care</option>
+            <option>Family Medicine</option>
+            <option>Nutrition and Dietetics</option>
+            <option>Speech Therapy</option>
+            <option>Audiology</option>
+            <option>Occupational Therapy</option>
+            <option>Ayurveda</option>
+            <option>Homeopathy</option>
+            <option>Unani Medicine</option>
+            <option>Siddha Medicine</option>
+            <option>Preventive Medicine</option>
+            <option>Community Medicine</option>
+            <option>Reproductive Medicine</option>
+            <option>Fertility Specialist</option>
+            <option>Sleep Medicine</option>
+            <option>Other</option>
+        </select>
+
+        <div id="otherDepartmentBox">
+            <label>Enter Department Name</label>
+            <input type="text" id="otherDepartment"
+            placeholder="Type your department">
+        </div>
+
+        <label>Appointment Date</label>
+        <input type="date" id="appointmentDate" required>
+
+        <label>Appointment Time</label>
+        <input type="time" id="appointmentTime" required>
+
+        <label>Reason for Appointment</label>
+        <textarea id="reason"
+        placeholder="Enter reason for appointment"
+        required></textarea>
+
+        <button type="submit">Submit Appointment</button>
+
+    </form>
+
+    <div id="successMessage">
+        <h3>Appointment Request Submitted!</h3>
+        <p>Your appointment request has been saved in this demo.</p>
+    </div>
+
+    <button type="button" class="back-btn"
+    onclick="window.location.href='patient-dashboard.html'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+<footer>
+    © 2026 MediAssist | Your Health, Our Support
+</footer>
+
+<script>
+
+// Set minimum appointment date to today
+const dateInput = document.getElementById("appointmentDate");
+
+const today = new Date();
+const localToday = new Date(
+    today.getTime() - today.getTimezoneOffset() * 60000
+).toISOString().split("T")[0];
+
+dateInput.min = localToday;
+
+
+// Show custom department field
+const department = document.getElementById("department");
+const otherBox = document.getElementById("otherDepartmentBox");
+const otherInput = document.getElementById("otherDepartment");
+
+department.addEventListener("change", function() {
+
+    if (department.value === "Other") {
+        otherBox.style.display = "block";
+        otherInput.required = true;
+    } else {
+        otherBox.style.display = "none";
+        otherInput.required = false;
+        otherInput.value = "";
+    }
+
+});
+
+
+// Submit appointment
+document.getElementById("appointmentForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    let selectedDepartment = department.value;
+
+    if (selectedDepartment === "Other") {
+        selectedDepartment = otherInput.value.trim();
+
+        if (!selectedDepartment) {
+            otherInput.focus();
+            return;
+        }
+    }
+
+    const appointment = {
+        patientName: document.getElementById("patientName").value.trim(),
+        mobile: document.getElementById("mobile").value,
+        doctor: document.getElementById("doctor").value.trim(),
+        department: selectedDepartment,
+        date: dateInput.value,
+        time: document.getElementById("appointmentTime").value,
+        reason: document.getElementById("reason").value.trim()
+    };
+
+    let appointments = JSON.parse(
+        localStorage.getItem("demoAppointments") || "[]"
+    );
+
+    appointments.push(appointment);
+
+    localStorage.setItem(
+        "demoAppointments",
+        JSON.stringify(appointments)
+    );
+
+    document.getElementById("successMessage").style.display = "block";
+
+    document.getElementById("appointmentForm").reset();
+
+    otherBox.style.display = "none";
+    otherInput.required = false;
+
+});
+
+</script>
+
+</body>
+</html>

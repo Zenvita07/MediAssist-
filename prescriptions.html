@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediAssist - My Prescriptions</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f0f7f8;
+    color: #263238;
+}
+
+header {
+    background: #087db5;
+    color: white;
+    text-align: center;
+    padding: 22px 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 7px 0 0;
+}
+
+.container {
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    color: #087db5;
+}
+
+.info-box {
+    background: #e5f7ed;
+    color: #147548;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.prescription-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+.prescription-card h3 {
+    color: #087db5;
+    margin-top: 0;
+}
+
+.prescription-card p {
+    line-height: 1.6;
+}
+
+.status {
+    display: inline-block;
+    background: #e5f7ed;
+    color: #147548;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.empty-box {
+    background: white;
+    padding: 35px 20px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+.empty-box .icon {
+    font-size: 45px;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 15px;
+    background: #087db5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back-btn {
+    background: #15966b;
+    max-width: 350px;
+    display: block;
+    margin: 25px auto;
+}
+
+footer {
+    text-align: center;
+    padding: 18px;
+    color: #64748b;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>MediAssist</h1>
+    <p>Your Health, Our Support</p>
+</header>
+
+<div class="container">
+
+    <h2 class="title">💊 My Prescriptions</h2>
+
+    <div class="info-box">
+        <b>Your Digital Prescriptions</b>
+        <p>
+        View your prescriptions provided by your doctor.
+        You can access them here whenever needed.
+        </p>
+    </div>
+
+    <div id="prescriptionList"></div>
+
+    <div class="empty-box" id="emptyMessage">
+        <div class="icon">📄</div>
+        <h3>No Prescriptions Available</h3>
+        <p>
+        Your doctor prescriptions will appear here
+        after they are added to your account.
+        </p>
+    </div>
+
+    <button class="back-btn" type="button"
+    onclick="window.location.href='patient-dashboard.html'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+<footer>
+    © 2026 MediAssist | Your Health, Our Support
+</footer>
+
+<script>
+
+function loadPrescriptions() {
+
+    const list = document.getElementById("prescriptionList");
+    const empty = document.getElementById("emptyMessage");
+
+    let prescriptions = JSON.parse(
+        localStorage.getItem("demoPrescriptions") || "[]"
+    );
+
+    list.innerHTML = "";
+
+    if (prescriptions.length === 0) {
+        empty.style.display = "block";
+        return;
+    }
+
+    empty.style.display = "none";
+
+    prescriptions.forEach(function(item) {
+
+        const card = document.createElement("div");
+        card.className = "prescription-card";
+
+        const title = document.createElement("h3");
+        title.textContent = "Doctor Prescription";
+
+        const doctor = document.createElement("p");
+        doctor.textContent = "Doctor: " + item.doctor;
+
+        const date = document.createElement("p");
+        date.textContent = "Date: " + item.date;
+
+        const medicine = document.createElement("p");
+        medicine.textContent = "Prescription Details: " + item.details;
+
+        const status = document.createElement("span");
+        status.className = "status";
+        status.textContent = "Available";
+
+        card.append(title, doctor, date, medicine, status);
+
+        if (item.fileUrl) {
+            const link = document.createElement("a");
+            link.href = item.fileUrl;
+            link.download = item.fileName || "prescription";
+            link.textContent = "View / Download Prescription";
+            link.style.display = "block";
+            link.style.marginTop = "15px";
+            card.appendChild(link);
+        }
+
+        list.appendChild(card);
+
+    });
+
+}
+
+loadPrescriptions();
+
+</script>
+
+</body>
+</html>
