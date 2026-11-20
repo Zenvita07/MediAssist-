@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediAssist - Home</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: #f3f8fc;
+    color: #263b50;
+}
+
+header {
+    background: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 3px 12px #dce7ef;
+}
+
+/* MediAssist SVG Logo */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.nav-logo svg {
+    width: 52px;
+    height: auto;
+    display: block;
+}
+
+.nav-brand {
+    font-family: Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.brand-medi {
+    color: #073c7a;
+}
+
+.brand-assist {
+    color: #079eaa;
+}
+
+nav, .header-right, .nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: #263b50;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover { color: #087db8; }
+
+.language-select {
+    padding: 10px;
+    border: 1px solid #087db8;
+    border-radius: 7px;
+    color: #087db8;
+    background: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-buttons a {
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 7px;
+    color: white;
+    background: #087db8;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.nav-buttons .register { background: #20a66b; }
+
+.hero {
+    margin: 30px auto;
+    width: 90%;
+    background: linear-gradient(120deg, #087db8, #20a66b);
+    color: white;
+    border-radius: 22px;
+    padding: 55px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.hero-content { flex: 1; min-width: 230px; }
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 18px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.hero-image {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 110px;
+    margin: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-buttons a {
+    display: inline-block;
+    padding: 13px 20px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: bold;
+    background: white;
+    color: #087db8;
+}
+
+.hero-buttons .green-btn {
+    background: #20a66b;
+    color: white;
+}
+
+.section {
+    padding: 45px 6%;
+    text-align: center;
+}
+
+.section-title {
+    color: #087db8;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.section-description {
+    color: #64748b;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.service-card {
+    background: white;
+    padding: 28px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px #dce7ef;
+    border-bottom: 4px solid #087db8;
+}
+
+.service-card:nth-child(even) {
+    border-bottom-color: #20a66b;
+}
+
+.service-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    color: #087db8;
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.service-card a {
+    display: inline-block;
+    margin-top: 18px;
+    background: #087db8;
+    color: white;
+    text-decoration: none;
+    padding: 11px 17px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+.service-card:nth-child(even) a { background: #20a66b; }
+
+.about {
+    background: white;
+    padding: 45px 8%;
+    text-align: center;
+}
+
+.about p {
+    max-width: 800px;
+    margin: 18px auto;
+    line-height: 1.8;
+    color: #64748b;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.why-card {
+    background: white;
+    border-radius: 13px;
+    padding: 23px 15px;
+    box-shadow: 0 3px 12px #dce7ef;
+}
+
+.why-card h3 {
+    color: #20a66b;
+    margin-bottom: 10px;
+}
+
+.why-card p {
+    color: #64748b;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+footer {
+    background: #123b60;
+    color: white;
+    padding: 30px 15px;
+    text-align: center;
+}
+
+footer p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+@media(max-width: 700px) {
+    header { justify-content: center; }
+
+    nav, .header-right {
+        justify-content: center;
+    }
+
+    .nav-logo svg {
+        width: 44px;
+    }
+
+    .nav-brand {
+        font-size: 22px;
+    }
+
+    .hero {
+        padding: 35px 22px;
+        text-align: center;
+    }
+
+    .hero h1 { font-size: 29px; }
+
+    .hero-buttons { justify-content: center; }
+
+    .hero-image {
+        width: 160px;
+        height: 160px;
+        font-size: 80px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <a href="index.html" class="nav-logo">
+        <svg viewBox="65 75 535 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="medical" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#0875b5"/>
+                    <stop offset="100%" stop-color="#12b99b"/>
+                </linearGradient>
+                <linearGradient id="hand" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#07509a"/>
+                    <stop offset="100%" stop-color="#087bb8"/>
+                </linearGradient>
+            </defs>
+            <path d="M300 175 C235 95 145 65 105 125 C65 190 115 260 185 300" fill="none" stroke="url(#medical)" stroke-width="13" stroke-linecap="round"/>
+            <path d="M300 175 C365 95 455 65 495 125 C535 190 485 260 415 300" fill="none" stroke="url(#medical)" stroke-width="13" stroke-linecap="round"/>
+            <path d="M255 105 H345 V155 H395 V245 H345 V295 H255 V245 H205 V155 H255 Z" fill="url(#medical)"/>
+            <circle cx="300" cy="150" r="25" fill="white"/>
+            <path d="M270 185 C245 220 265 260 300 265 C335 260 355 220 330 185" fill="none" stroke="#073c7a" stroke-width="10" stroke-linecap="round"/>
+            <path d="M300 265 V275" stroke="#073c7a" stroke-width="9"/>
+            <circle cx="300" cy="285" r="15" fill="white" stroke="#073c7a" stroke-width="8"/>
+            <circle cx="300" cy="285" r="5" fill="#12a99d"/>
+            <path d="M405 220 H455 L470 190 L485 265 L505 170 L520 235 L535 210 L550 220 H590" fill="none" stroke="#12ad9b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M105 335 C145 300 185 300 225 315 L280 335 C310 345 340 330 370 310 L415 290 C445 280 465 300 440 320 L375 365 C325 395 265 390 215 370 L155 350 C135 345 120 340 105 335 Z" fill="url(#hand)"/>
+            <path d="M205 340 C250 355 285 370 315 360 C345 350 365 330 390 320" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-brand"><span class="brand-medi">Medi</span><span class="brand-assist">Assist</span></span>
+    </a>
+
+    <nav>
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="#services" data-i18n="services">Services</a>
+        <a href="#about" data-i18n="about">About</a>
+        <a href="#contact" data-i18n="contact">Contact</a>
+    </nav>
+
+    <div class="header-right">
+
+        <select class="language-select" id="languageSelect"
+                aria-label="Select language"
+                onchange="changeLanguage(this.value)">
+
+            <option value="en">English</option>
+            <option value="gu">ગુજરાતી</option>
+            <option value="hi">हिन्दी</option>
+
+        </select>
+
+        <div class="nav-buttons">
+            <a href="register.html" class="register"
+               data-i18n="register">Register</a>
+
+            <a href="login.html" data-i18n="login">Login</a>
+        </div>
+
+    </div>
+</header>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1 data-i18n="welcome">Welcome to MediAssist</h1>
+
+        <p data-i18n="tagline">
+            Your Health, Our Support. Manage your health information,
+            explore doctors and organize your appointment requests easily.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="login.html" data-i18n="book">
+                Book Appointment
+            </a>
+
+            <a href="#services" class="green-btn"
+               data-i18n="explore">
+                Explore Services
+            </a>
+
+        </div>
+    </div>
+
+    <div class="hero-image">👩‍⚕️</div>
+
+</section>
+
+<section class="section" id="services">
+
+    <h2 class="section-title" data-i18n="ourServices">
+        Our Services
+    </h2>
+
+    <p class="section-description" data-i18n="serviceDesc">
+        Simple digital healthcare support for everyone.
+    </p>
+
+    <div class="services">
+
+        <div class="service-card">
+            <div class="service-icon">💊</div>
+
+            <h3 data-i18n="prescription">Online Prescription</h3>
+
+            <p data-i18n="prescriptionDesc">
+                View and manage your online medical prescriptions.
+            </p>
+
+            <a href="prescriptions.html" data-i18n="viewPrescription">
+                View Prescription
+            </a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">📅</div>
+
+            <h3 data-i18n="appointment">Appointment Support</h3>
+
+            <p data-i18n="appointmentDesc">
+                Manage your doctor appointment requests through MediAssist.
+            </p>
+
+            <a href="login.html" data-i18n="bookAppointment">
+                Book Appointment
+            </a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">👨‍⚕️</div>
+
+            <h3 data-i18n="doctor">Doctor Information</h3>
+
+            <p data-i18n="doctorDesc">
+                Explore doctor information and different medical specializations.
+            </p>
+
+            <a href="login.html" data-i18n="viewDoctors">View Doctors</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🗂️</div>
+
+            <h3 data-i18n="reports">My Medical Reports</h3>
+
+            <p data-i18n="reportsDesc">
+                Save your medical report photos in your personal patient account.
+                Share them with doctors only after giving permission.
+            </p>
+
+            <a href="login.html" data-i18n="myReports">My Reports</a>
+        </div>
+
+    </div>
+</section>
+
+<section class="about" id="about">
+
+    <h2 class="section-title" data-i18n="aboutTitle">
+        About MediAssist
+    </h2>
+
+    <p data-i18n="aboutDesc">
+        MediAssist is a digital healthcare support platform designed to help
+        patients organize their health information, save medical report photos
+        and manage doctor appointment requests. It also helps patients share
+        their reports with doctors after giving permission.
+    </p>
+
+</section>
+
+<section class="section">
+
+    <h2 class="section-title" data-i18n="whyTitle">
+        Why Choose MediAssist?
+    </h2>
+
+    <p class="section-description" data-i18n="whyDesc">
+        Your healthcare information, organized in one place.
+    </p>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+            <h3 data-i18n="easy">Easy to Use</h3>
+            <p data-i18n="easyDesc">Simple and user-friendly design.</p>
+        </div>
+
+        <div class="why-card">
+            <h3 data-i18n="time">Time Saving</h3>
+            <p data-i18n="timeDesc">Manage appointment requests easily.</p>
+        </div>
+
+        <div class="why-card">
+            <h3 data-i18n="reportStorage">Report Storage</h3>
+            <p data-i18n="reportStorageDesc">
+                Keep report photos organized in your account.
+            </p>
+        </div>
+
+        <div class="why-card">
+            <h3 data-i18n="privacy">Privacy Control</h3>
+            <p data-i18n="privacyDesc">
+                Share reports with doctors only with your permission.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<footer id="contact">
+
+    <h2>MediAssist</h2>
+
+    <p data-i18n="footerTagline">Your Health, Our Support</p>
+
+    <p data-i18n="email">
+        Contact: Add your official email here
+    </p>
+
+    <p data-i18n="copyright">
+        © 2026 MediAssist | All Rights Reserved
+    </p>
+
+</footer>
+
+<script>
+
+const translations = {
+
+en: {
+home:"Home", services:"Services", about:"About", contact:"Contact",
+register:"Register", login:"Login",
+welcome:"Welcome to MediAssist",
+tagline:"Your Health, Our Support. Manage your health information, explore doctors and organize your appointment requests easily.",
+book:"Book Appointment", explore:"Explore Services",
+ourServices:"Our Services",
+serviceDesc:"Simple digital healthcare support for everyone.",
+prescription:"Online Prescription",
+prescriptionDesc:"View and manage your online medical prescriptions.",
+viewPrescription:"View Prescription",
+appointment:"Appointment Support",
+appointmentDesc:"Manage your doctor appointment requests through MediAssist.",
+bookAppointment:"Book Appointment",
+doctor:"Doctor Information",
+doctorDesc:"Explore doctor information and different medical specializations.",
+viewDoctors:"View Doctors",
+reports:"My Medical Reports",
+reportsDesc:"Save your medical report photos in your personal patient account. Share them with doctors only after giving permission.",
+myReports:"My Reports",
+aboutTitle:"About MediAssist",
+aboutDesc:"MediAssist is a digital healthcare support platform designed to help patients organize their health information, save medical report photos and manage doctor appointment requests. It also helps patients share their reports with doctors after giving permission.",
+whyTitle:"Why Choose MediAssist?",
+whyDesc:"Your healthcare information, organized in one place.",
+easy:"Easy to Use", easyDesc:"Simple and user-friendly design.",
+time:"Time Saving", timeDesc:"Manage appointment requests easily.",
+reportStorage:"Report Storage",
+reportStorageDesc:"Keep report photos organized in your account.",
+privacy:"Privacy Control",
+privacyDesc:"Share reports with doctors only with your permission.",
+footerTagline:"Your Health, Our Support",
+email:"Contact: Add your official email here",
+copyright:"© 2026 MediAssist | All Rights Reserved"
+},
+
+gu: {
+home:"હોમ", services:"સેવાઓ", about:"અમારા વિશે", contact:"સંપર્ક",
+register:"રજીસ્ટર", login:"લોગિન",
+welcome:"MediAssist માં આપનું સ્વાગત છે",
+tagline:"તમારું સ્વાસ્થ્ય, અમારો સહયોગ. તમારી સ્વાસ્થ્ય માહિતી સાચવો, ડોક્ટરો શોધો અને તમારી એપોઇન્ટમેન્ટ સરળતાથી ગોઠવો.",
+book:"એપોઇન્ટમેન્ટ બુક કરો", explore:"સેવાઓ જુઓ",
+ourServices:"અમારી સેવાઓ",
+serviceDesc:"દરેક માટે સરળ ડિજિટલ હેલ્થકેર સહાય.",
+prescription:"ઓનલાઇન પ્રિસ્ક્રિપ્શન",
+prescriptionDesc:"તમારા ઓનલાઇન મેડિકલ પ્રિસ્ક્રિપ્શન જુઓ અને સંભાળો.",
+viewPrescription:"પ્રિસ્ક્રિપ્શન જુઓ",
+appointment:"એપોઇન્ટમેન્ટ સહાય",
+appointmentDesc:"MediAssist દ્વારા ડોક્ટરની એપોઇન્ટમેન્ટની વિનંતી સંભાળો.",
+bookAppointment:"એપોઇન્ટમેન્ટ બુક કરો",
+doctor:"ડોક્ટરની માહિતી",
+doctorDesc:"ડોક્ટરો અને વિવિધ મેડિકલ વિભાગોની માહિતી મેળવો.",
+viewDoctors:"ડોક્ટરો જુઓ",
+reports:"મારા મેડિકલ રિપોર્ટ્સ",
+reportsDesc:"તમારા વ્યક્તિગત પેશન્ટ એકાઉન્ટમાં મેડિકલ રિપોર્ટના ફોટા સાચવો. તમારી મંજૂરી પછી જ ડોક્ટર સાથે શેર કરો.",
+myReports:"મારા રિપોર્ટ્સ",
+aboutTitle:"MediAssist વિશે",
+aboutDesc:"MediAssist એક ડિજિટલ હેલ્થકેર સહાય પ્લેટફોર્મ છે. તે દર્દીઓને તેમની સ્વાસ્થ્ય માહિતી ગોઠવવામાં, મેડિકલ રિપોર્ટના ફોટા સાચવવામાં અને ડોક્ટરની એપોઇન્ટમેન્ટની વિનંતી કરવામાં મદદ કરે છે. દર્દીઓ તેમની મંજૂરી આપ્યા પછી ડોક્ટર સાથે રિપોર્ટ શેર પણ કરી શકે છે.",
+whyTitle:"MediAssist શા માટે પસંદ કરશો?",
+whyDesc:"તમારી સ્વાસ્થ્ય સંબંધિત માહિતી એક જ જગ્યાએ.",
+easy:"વાપરવામાં સરળ", easyDesc:"સરળ અને વપરાશકર્તા માટે અનુકૂળ ડિઝાઇન.",
+time:"સમયની બચત", timeDesc:"એપોઇન્ટમેન્ટની વિનંતી સરળતાથી સંભાળો.",
+reportStorage:"રિપોર્ટ સ્ટોરેજ",
+reportStorageDesc:"તમારા એકાઉન્ટમાં રિપોર્ટના ફોટા સાચવો.",
+privacy:"ગોપનીયતા નિયંત્રણ",
+privacyDesc:"તમારી મંજૂરીથી જ ડોક્ટર સાથે રિપોર્ટ શેર કરો.",
+footerTagline:"તમારું સ્વાસ્થ્ય, અમારો સહયોગ",
+email:"સંપર્ક: તમારો અધિકૃત ઈમેલ અહીં ઉમેરો",
+copyright:"© 2026 MediAssist | સર્વાધિકાર સુરક્ષિત"
+},
+
+hi: {
+home:"होम", services:"सेवाएँ", about:"हमारे बारे में", contact:"संपर्क",
+register:"रजिस्टर", login:"लॉगिन",
+welcome:"MediAssist में आपका स्वागत है",
+tagline:"आपका स्वास्थ्य, हमारा सहयोग। अपनी स्वास्थ्य जानकारी व्यवस्थित करें, डॉक्टर खोजें और अपॉइंटमेंट आसानी से प्रबंधित करें.",
+book:"अपॉइंटमेंट बुक करें", explore:"सेवाएँ देखें",
+ourServices:"हमारी सेवाएँ",
+serviceDesc:"सभी के लिए सरल डिजिटल हेल्थकेयर सहायता।",
+prescription:"ऑनलाइन प्रिस्क्रिप्शन",
+prescriptionDesc:"अपने ऑनलाइन मेडिकल प्रिस्क्रिप्शन देखें और प्रबंधित करें।",
+viewPrescription:"प्रिस्क्रिप्शन देखें",
+appointment:"अपॉइंटमेंट सहायता",
+appointmentDesc:"MediAssist के माध्यम से डॉक्टर की अपॉइंटमेंट अनुरोध प्रबंधित करें।",
+bookAppointment:"अपॉइंटमेंट बुक करें",
+doctor:"डॉक्टर की जानकारी",
+doctorDesc:"डॉक्टरों और विभिन्न मेडिकल विशेषज्ञताओं की जानकारी प्राप्त करें।",
+viewDoctors:"डॉक्टर देखें",
+reports:"मेरी मेडिकल रिपोर्ट",
+reportsDesc:"अपने व्यक्तिगत मरीज खाते में मेडिकल रिपोर्ट की तस्वीरें सुरक्षित रखें। अपनी अनुमति के बाद ही डॉक्टरों के साथ साझा करें।",
+myReports:"मेरी रिपोर्ट",
+aboutTitle:"MediAssist के बारे में",
+aboutDesc:"MediAssist एक डिजिटल हेल्थकेयर सहायता प्लेटफॉर्म है, जो मरीजों को अपनी स्वास्थ्य जानकारी व्यवस्थित करने, मेडिकल रिपोर्ट की तस्वीरें सुरक्षित रखने और डॉक्टर की अपॉइंटमेंट अनुरोध प्रबंधित करने में मदद करता है। मरीज अपनी अनुमति देने के बाद डॉक्टरों के साथ रिपोर्ट साझा भी कर सकते हैं.",
+whyTitle:"MediAssist क्यों चुनें?",
+whyDesc:"आपकी स्वास्थ्य जानकारी, एक ही जगह पर.",
+easy:"उपयोग में आसान", easyDesc:"सरल और उपयोगकर्ता के अनुकूल डिज़ाइन.",
+time:"समय की बचत", timeDesc:"अपॉइंटमेंट अनुरोध आसानी से प्रबंधित करें.",
+reportStorage:"रिपोर्ट स्टोरेज",
+reportStorageDesc:"अपने खाते में रिपोर्ट की तस्वीरें सुरक्षित रखें.",
+privacy:"गोपनीयता नियंत्रण",
+privacyDesc:"अपनी अनुमति से ही डॉक्टरों के साथ रिपोर्ट साझा करें.",
+footerTagline:"आपका स्वास्थ्य, हमारा सहयोग",
+email:"संपर्क: अपना आधिकारिक ईमेल यहाँ जोड़ें",
+copyright:"© 2026 MediAssist | सर्वाधिकार सुरक्षित"
+}
+
+};
+
+function changeLanguage(language) {
+
+    const selectedLanguage = translations[language];
+
+    if (!selectedLanguage) return;
+
+    document.documentElement.lang = language;
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+
+        const key = element.getAttribute("data-i18n");
+
+        if (selectedLanguage[key]) {
+            element.textContent = selectedLanguage[key];
+        }
+
+    });
+
+    try {
+        localStorage.setItem("mediassistLanguage", language);
+    } catch (error) {
+        console.log("Language preference could not be saved.");
+    }
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+
+    let savedLanguage = "en";
+
+    try {
+        savedLanguage =
+            localStorage.getItem("mediassistLanguage") || "en";
+    } catch (error) {}
+
+    const languageSelect =
+        document.getElementById("languageSelect");
+
+    languageSelect.value =
+        translations[savedLanguage] ? savedLanguage : "en";
+
+    changeLanguage(languageSelect.value);
+
+});
+
+</script>
+
+</body>
+</html>
